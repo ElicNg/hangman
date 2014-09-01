@@ -1,0 +1,55 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace views "com.elicng.hangman.views.*";
+@namespace controls "com.elicng.hangman.controls.*";
+
+@font-face {
+	src: url("/content/fonts/Open Sans regular.ttf");
+	fontFamily: OpenSansRegular;
+	embedAsCFF: true;
+}
+
+@font-face {
+	src: url("/content/fonts/Open Sans 600.ttf");
+	fontFamily: OpenSans600;
+	embedAsCFF: true;
+}
+
+global
+{
+	fontFamily: OpenSansRegular;
+	fontSize: 22px;
+}
+
+s|ViewNavigatorApplication {
+	backgroundColor: #231F20;
+}
+
+s|View {
+	backgroundColor: #231F20;
+}
+
+s|Label {
+	color: #5AC8FA;
+	fontSize: 18px;
+	fontFamily: OpenSansRegular;
+}
+	
+views|Menu s|Button {
+	skinClass: ClassReference("com.elicng.hangman.controls.skins.ButtonMenuSkin");
+	fontFamily: OpenSansRegular;
+	fontSize: 25px;
+}
+
+views|Menu #lblTitle {
+	fontSize:40px;
+}
+
+s|DataGroup {
+	contentBackgroundAlpha: 0;
+}
+
+.refresh {
+	icon: Embed(source="/content/images/icons/refresh.png")
+}
+

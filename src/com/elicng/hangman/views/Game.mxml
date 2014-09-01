@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="Game" xmlns:controls="com.elicng.hangman.controls.*"
+		initialize="initializeHandler(event)">
+	
+	<s:actionContent>
+		<s:VGroup paddingRight="10">
+			<s:Image verticalCenter="0" horizontalCenter="0" source="@Embed(source='/content/images/icons/refresh.png')" width="30" height="30" click="btnRetry_clickHandler(event)"/>
+		</s:VGroup>
+	</s:actionContent>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.elicng.hangman.controls.LetterKey;
+			import com.elicng.hangman.events.HangmanStateEvent;
+			import com.elicng.hangman.events.LetterKeyClickedEvent;
+			import com.elicng.utils.AlertUtils;
+			
+			import mx.events.FlexEvent;
+			
+			protected function btnMenu_clickHandler(event:MouseEvent):void
+			{
+				HangmanGame.navigator.popToFirstView();
+			}
+			
+			protected function letters_clickHandler(event:LetterKeyClickedEvent):void
+			{
+				event.stopPropagation();
+				var char:String = String(event.data).toUpperCase();
+				
+				if (wordControl.reveal(char) >= 0) {
+					event.key.setState(LetterKey.STATE_CORRECT);
+				} else {
+					hangman.setTo(hangman.index +1);
+					event.key.setState(LetterKey.STATE_INCORRECT);
+				}
+			}
+			
+			protected function hangman_completedHandler(event:HangmanStateEvent):void
+			{
+				AlertUtils.show("Sorry, but you lost.");
+				keyboard.enabled = false;
+			}
+			
+			protected function btnRetry_clickHandler(event:MouseEvent):void
+			{
+				HangmanGame.navigator.popToFirstView();
+				HangmanGame.navigator.pushView(Game);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<!-- Debug Data -->
+	<fx:Script>
+		<![CDATA[
+			import com.elicng.hangman.WordLoader;
+			
+			protected function initializeHandler(event:FlexEvent):void
+			{
+				wordControl.setWord(WordLoader.getRandomWord().toUpperCase());
+			}
+			
+			
+		]]>
+	</fx:Script>
+	
+	<controls:Hangman id="hangman" horizontalCenter="0" top="30" hangman_completed="hangman_completedHandler(event)"/>
+	
+	<s:VGroup gap="10" bottom="4" horizontalCenter="0" horizontalAlign="center"  >
+		<controls:Word id="wordControl" horizontalCenter="0" />
+		
+		<controls:LetterContainer id="keyboard" letterkeyclicked="letters_clickHandler(event)"/>
+	</s:VGroup>
+	
+</s:View>

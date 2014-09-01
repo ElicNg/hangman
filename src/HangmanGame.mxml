@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:hangman="com.elicng.hangman.*"
+			   xmlns:views="com.elicng.hangman.views.*"
+			   applicationDPI="160"
+			   viewMenu="com.elicng.hangman.views.Menu" firstView="com.elicng.hangman.views.Menu"
+			   preinitialize="instance = this;"
+			   initialize="initializeHandler(event)">
+	<fx:Style source="/Content/styles/Hangman.css" />
+	
+	<fx:Script>
+		<![CDATA[
+			import com.elicng.hangman.WordLoader;
+			
+			import mx.events.FlexEvent;
+			
+			import spark.components.ViewNavigator;
+			
+			private static var instance:HangmanGame;
+			
+			public static function get navigator():ViewNavigator {
+				return instance.navigator as ViewNavigator;
+			}
+			
+			protected function btnMenu_clickHandler(event:MouseEvent):void
+			{
+				navigator.popToFirstView();				
+			}
+			
+			protected function initializeHandler(event:FlexEvent):void
+			{
+				var wordLoader:WordLoader = new WordLoader();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:navigationContent>
+		<s:Button id="btnMenu" label="Menu" click="btnMenu_clickHandler(event)"/>
+	</s:navigationContent>
+	
+	<s:titleContent>
+		
+	</s:titleContent>
+	
+	<s:actionContent>
+		
+	</s:actionContent>
+</s:ViewNavigatorApplication>

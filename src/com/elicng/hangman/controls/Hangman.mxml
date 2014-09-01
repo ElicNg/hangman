@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark">
+	
+	<fx:Metadata>
+		[Event(name="change", type="com.elicng.hangman.events.HangmanStateEvent")]
+		[Event(name="hangman_completed", type="com.elicng.hangman.events.HangmanStateEvent")]
+	</fx:Metadata>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.elicng.hangman.events.HangmanStateEvent;
+			
+			[Embed(source="/content/images/hangman/Hangman-0.png")]
+			private var hangman0:Class;
+			
+			[Embed(source="/content/images/hangman/Hangman-1.png")]
+			private var hangman1:Class;
+			
+			[Embed(source="/content/images/hangman/Hangman-2.png")]
+			private var hangman2:Class;
+			
+			[Embed(source="/content/images/hangman/Hangman-3.png")]
+			private var hangman3:Class;
+			
+			[Embed(source="/content/images/hangman/Hangman-4.png")]
+			private var hangman4:Class;
+			
+			[Embed(source="/content/images/hangman/Hangman-5.png")]
+			private var hangman5:Class;
+			
+			[Embed(source="/content/images/hangman/Hangman-6.png")]
+			private var hangman6:Class;
+			
+			private var _hangmanIndex:int = 0;
+			private static const MAX_TRIES:int = 6;
+			
+			public function setTo(index:int):void {
+				if (index <= MAX_TRIES) {
+					_hangmanIndex = index;
+					invalidateDisplayList();
+				}
+				dispatchEvents();
+			}
+			
+			public function get index():int {
+				return _hangmanIndex;
+			}
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				var source:Object = this[String("hangman" + index)];
+				if (source) {
+					imgHangman.source = source;
+				}
+				
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+			}
+			
+			private function dispatchEvents():void
+			{
+				if (hasEventListener(HangmanStateEvent.HANGMAN_INDEX_CHANGE)) {
+					dispatchEvent(new HangmanStateEvent(HangmanStateEvent.HANGMAN_INDEX_CHANGE));
+				}
+				if (index >= MAX_TRIES) {
+					if (hasEventListener(HangmanStateEvent.HANGMAN_COMPLETED)) {
+						dispatchEvent(new HangmanStateEvent(HangmanStateEvent.HANGMAN_COMPLETED));
+					}	
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Image id="imgHangman" />
+</s:Group>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009"
+					xmlns:s="library://ns.adobe.com/flex/spark"
+					width="25" height="25"
+					autoDrawBackground="false"
+					click="clickHandler(event)"
+					currentState="normal">
+	
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+			
+		.letterLabel {
+			fontSize: 13;
+			fontFamily: OpenSans600;
+		}
+	</fx:Style>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.elicng.hangman.events.LetterKeyClickedEvent;
+			
+			public static const STATE_NORMAL:int = 0;
+			public static const STATE_CORRECT:int = 1;
+			public static const STATE_INCORRECT:int = 2;
+			
+			override public function set data(value:Object):void
+			{
+				super.data = value;
+			}
+			
+			protected function clickHandler(event:MouseEvent):void
+			{
+				event.stopPropagation();
+				owner.dispatchEvent(new LetterKeyClickedEvent(data, this));
+			}
+			
+			public function setState(value:int):void {
+				var newState:String;
+				
+				switch(value)
+				{
+					case STATE_CORRECT:
+					{
+						newState = "correct";
+						enabled = false;
+						mouseEnabled = false;
+						break;
+					}
+						
+					case STATE_INCORRECT:
+					{
+						newState = "incorrect";
+						enabled = false;
+						mouseEnabled = false;
+						break;
+					}
+						
+					case STATE_NORMAL:
+					{
+						
+					}
+					default: 
+					{
+						newState = "normal"
+						break;
+					}
+				}
+			
+				
+				if (newState != currentState) {
+					currentState = newState;
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="correct" />
+		<s:State name="incorrect" />
+		<s:State name="down"/>
+	</s:states>
+	
+	<s:Rect bottom="0" left="0" right="0" top="0" radiusX="3" radiusY="3">
+		<s:fill >
+			<s:LinearGradient rotation="90">
+				<s:GradientEntry color="0x959595" color.down="0x626262" color.correct="0x626262" color.incorrect="0x626262"/>
+				<s:GradientEntry color="0x626262" color.down="0x959595" color.correct="0x626262" color.incorrect="0x626262"/>
+			</s:LinearGradient>
+		</s:fill>
+	</s:Rect>
+	<s:Label id="lblLetter" horizontalCenter="0" text="{data}" verticalCenter="2"/>
+	
+</s:ItemRenderer>
