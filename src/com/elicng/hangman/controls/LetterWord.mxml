@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark"
+				height="50"
+				width="50"
+				autoDrawBackground="false">
+	<fx:Script>
+		<![CDATA[
+			
+			override public function set data(value:Object):void
+			{
+				super.data = value;
+				
+				if (value != null) {
+					bottomLineColor.color = 0x38B154;
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+	
+	<s:Rect right="0" left="0" bottom="0" height="4">
+		<s:fill>
+			<s:SolidColor id="bottomLineColor" color="0x666666" />
+		</s:fill>
+	</s:Rect>
+	
+	<s:Label id="lblLetter" fontSize="40" text="{data}" horizontalCenter="0" verticalCenter="6"/>
+</s:ItemRenderer>

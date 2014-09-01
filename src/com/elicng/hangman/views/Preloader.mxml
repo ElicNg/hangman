@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SplashScreenImage xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					 xmlns:s="library://ns.adobe.com/flex/spark">
+	<fx:Script>
+		<![CDATA[
+			
+			override public function initialized(document:Object, id:String):void
+			{
+				super.initialized(document, id);
+			}
+			
+		]]>
+	</fx:Script>
+	
+</s:SplashScreenImage>

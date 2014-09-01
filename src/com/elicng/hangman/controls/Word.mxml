@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 >
+	
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayList;
+
+			private var splittedWord:Array;
+			
+			private var word:String;
+			
+			public function setWord(value:String):void {
+				word = value;
+				// Create a list of data to create empty lines
+				var emptyArray:Array = new Array();
+				for (var i:int = 0; i < value.length; i++) {
+					emptyArray.push(null);
+				}
+				letters.dataProvider = new ArrayList(emptyArray);
+			}
+			
+			/**
+			 * Return the index of the letter in the word
+			 */
+			public function reveal(value:String, startIndex:int = 0):int {
+				var index:int = word.indexOf(value, startIndex); 
+				if (index >= 0) {
+					letters.dataProvider.setItemAt(value, index);
+					reveal(value, index + 1);
+				}
+				return index;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:DataGroup id="letters" itemRenderer="com.elicng.hangman.controls.LetterWord" >
+		<s:layout>
+			<s:HorizontalLayout />
+		</s:layout>
+	</s:DataGroup>
+</s:Group>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="Menu"
+		actionBarVisible="false"
+		backgroundColor="0x231F20">
+	
+	<fx:Script>
+		<![CDATA[
+			protected function btnNewGame_clickHandler(event:MouseEvent):void
+			{
+				HangmanGame.navigator.pushView(Game);
+			}
+		]]>
+	</fx:Script>
+	
+	
+	<s:Label id="lblTitle" text="Hangman" horizontalCenter="0" top="40" />
+	
+	<s:VGroup verticalCenter="0" horizontalCenter="0" horizontalAlign="center">
+		<s:Button id="btnNewGame" label="Play" click="btnNewGame_clickHandler(event)"/>
+		<s:Button id="btnOptions" label="Options"/>
+		<s:Button id="btnHelp" label="Help"/>
+		<s:Button id="btnShare" label="Share"/>
+		<s:Button id="btnAbout" label="About"/>
+	</s:VGroup>
+	
+	<s:Label text="By Elic Ng" bottom="3" right="3" fontSize="13"/>
+</s:View>
