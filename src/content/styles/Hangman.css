@@ -4,35 +4,37 @@
 @namespace controls "com.elicng.hangman.controls.*";
 
 @font-face {
-	src: url("/content/fonts/Open Sans regular.ttf");
-	fontFamily: OpenSansRegular;
+	src: url("/content/fonts/Roboto-Regular.ttf");
+	fontFamily: Roboto;
 	embedAsCFF: true;
 }
 
 @font-face {
-	src: url("/content/fonts/Open Sans 600.ttf");
-	fontFamily: OpenSans600;
+	src: url("/content/fonts/Roboto-Bold.ttf");
+	fontFamily: RobotoBold;
 	embedAsCFF: true;
 }
 
 global
 {
-	fontFamily: OpenSansRegular;
+	fontFamily: Roboto;
 	fontSize: 22px;
 }
 
+s|ActionBar {
+	skinClass: ClassReference("com.elicng.hangman.controls.skins.ActionBarSkin");
+}
+
 s|ViewNavigatorApplication {
-	backgroundColor: #231F20;
 }
 
 s|View {
-	backgroundColor: #231F20;
+	backgroundColor: #E7ECE6;
 }
 
 s|Label {
-	color: #5AC8FA;
+	color: #33B5E5;
 	fontSize: 18px;
-	fontFamily: OpenSansRegular;
 }
 	
 views|Menu s|Button {
